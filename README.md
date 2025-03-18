@@ -60,3 +60,4 @@ streamlit run app.py
 © 2026 FireHox Web Solutions
 <!-- [2024-09-09T11:08:39] style: improve formatting and badge alignment -->
 <!-- [2024-12-08T15:47:31] docs(readme): update project documentation and overview -->
+<!-- [2025-03-18T16:07:11] style: improve formatting and badge alignment -->
