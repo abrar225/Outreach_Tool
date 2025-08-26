@@ -60,3 +60,4 @@ streamlit run app.py
 © 2026 FireHox Web Solutions
 - [2025-02-11T11:39:48] docs(readme): improve documentation notes and usage guidelines
 - [2025-05-30T15:34:54] docs(readme): improve documentation notes and usage guidelines
+- [2025-08-26T17:11:59] docs(readme): improve documentation notes and usage guidelines
