@@ -62,3 +62,4 @@ streamlit run app.py
 - [2025-05-30T15:34:54] docs(readme): improve documentation notes and usage guidelines
 - [2025-08-26T17:11:59] docs(readme): improve documentation notes and usage guidelines
 - [2025-08-31T22:29:18] style: enhance README formatting and badge definitions
+- [2025-09-12T15:45:40] docs(readme): improve documentation notes and usage guidelines
