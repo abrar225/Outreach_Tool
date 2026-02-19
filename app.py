@@ -831,10 +831,12 @@ if st.session_state.step == 1:
                         qr_placeholder = st.empty()
                         status_text = st.empty()
                         
-                        # Loop to show live browser view (QR Code) for 45 seconds
+                        # Loop to show live browser view (QR Code) for 120 seconds
                         # This allows the user to scan the QR code since the browser is hidden
                         start_time = time.time()
-                        while time.time() - start_time < 45:
+                        SCAN_TIMEOUT = 120
+                        
+                        while time.time() - start_time < SCAN_TIMEOUT:
                             if not st.session_state.bot or not st.session_state.bot.page:
                                 break
                             
@@ -848,7 +850,9 @@ if st.session_state.step == 1:
                                 # Take screenshot of current page (QR code should be there)
                                 screenshot = st.session_state.bot.page.screenshot()
                                 qr_placeholder.image(screenshot, caption="📸 Scan this QR Code with your phone", width=500)
-                                status_text.info(f"⏳ Waiting for scan... ({int(45 - (time.time() - start_time))}s remaining)")
+                                
+                                remaining = int(SCAN_TIMEOUT - (time.time() - start_time))
+                                status_text.info(f"⏳ Waiting for scan... ({remaining}s remaining)")
                                 time.sleep(1.5)
                             except Exception:
                                 break
