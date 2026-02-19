@@ -687,6 +687,34 @@ if 'campaign_running' not in st.session_state:
 st.markdown('<h1 class="main-header">📱 FireHox WhatsApp Outreach</h1>', unsafe_allow_html=True)
 st.markdown('<p class="sub-header">Professional WhatsApp Marketing Automation with Anti-Ban Protection</p>', unsafe_allow_html=True)
 
+# ==================== DEVICE DETECTION ====================
+st.markdown("""
+<script>
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+if (isMobile) {
+    const root = window.parent.document.querySelector('.stApp');
+    if (root) {
+        root.innerHTML = `
+            <div style="background-color: #141414; color: #FAFAFA; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; font-family: 'Inter', sans-serif;">
+                <h1 style="font-size: 4rem; margin-bottom: 1rem;">🖥️</h1>
+                <h2 style="font-weight: 800; font-size: 1.8rem; margin-bottom: 1rem;">Desktop Access Only</h2>
+                <p style="color: #A0A0A0; font-size: 1rem; line-height: 1.6; max-width: 400px;">
+                    This automation tool requires a desktop-grade browser to run the WhatsApp engine. 
+                    Please access this link from your <strong>Windows, Mac, or Linux computer</strong>.
+                </p>
+                <div style="margin-top: 2rem; padding: 1rem; border: 1px solid #333; border-radius: 8px; background: #1E1E1E;">
+                    <small style="color: #666;">Mobile devices are not supported for automation engines.</small>
+                </div>
+            </div>
+        `;
+    }
+}
+</script>
+""", unsafe_allow_html=True)
+
+# Also show a Streamlit-native warning in case JS is slow to load
+st.warning("🖥️ **System Note:** This tool is designed for **Desktop Use Only**. Mobile browser automation is not supported.")
+
 # ==================== PROGRESS INDICATORS ====================
 col1, col2, col3 = st.columns(3)
 
