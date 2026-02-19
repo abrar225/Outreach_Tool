@@ -126,12 +126,14 @@ class WhatsAppBot:
             # Launch persistent context
             # Detect cloud environment (Streamlit Cloud uses Linux)
             is_cloud = sys.platform.startswith("linux")
+            # Set specific viewport for cloud to ensure elements render for screenshots
+            viewport_config = {"width": 1280, "height": 800} if is_cloud else None
             
             try:
                 self.context = self.playwright.chromium.launch_persistent_context(
                     user_data_dir=USER_DATA_DIR,
                     headless=is_cloud,  # Run headless on Streamlit Cloud
-                    viewport=None,  # Maximize window
+                    viewport=viewport_config,
                     args=[
                         '--start-maximized',
                         '--disable-blink-features=AutomationControlled',

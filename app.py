@@ -26,8 +26,8 @@ def install_playwright_browsers():
             if not os.path.exists(marker_file):
                 with st.spinner("🚀 First-time Setup: Installing WhatsApp Engine components... (May take 1 minute)"):
                     subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], check=True)
-                    # Install dependencies for the browser
-                    subprocess.run([sys.executable, "-m", "playwright", "install-deps", "chromium"], check=True)
+                    # Note: 'install-deps' requires sudo, which we don't have.
+                    # System deps are handled by packages.txt
                     with open(marker_file, "w") as f:
                         f.write("Installed")
                 st.success("✅ Engine components installed successfully!")
@@ -824,6 +824,36 @@ if st.session_state.step == 1:
                 if success:
                     st.session_state.bot = bot
                     st.success(message)
+                    
+                    # ==================== CLOUD QR DISPLAY ====================
+                    if sys.platform.startswith("linux"):
+                        st.info("☁️ Headless Cloud Mode: Displaying Browser View below...")
+                        qr_placeholder = st.empty()
+                        status_text = st.empty()
+                        
+                        # Loop to show live browser view (QR Code) for 45 seconds
+                        # This allows the user to scan the QR code since the browser is hidden
+                        start_time = time.time()
+                        while time.time() - start_time < 45:
+                            if not st.session_state.bot or not st.session_state.bot.page:
+                                break
+                            
+                            try:
+                                # Check if already logged in (chat list visible)
+                                if st.session_state.bot.page.locator('div[data-testid="chat-list"]').count() > 0:
+                                    qr_placeholder.empty()
+                                    status_text.success("✅ Login detected! You can now click 'Login Complete'.")
+                                    break
+                                
+                                # Take screenshot of current page (QR code should be there)
+                                screenshot = st.session_state.bot.page.screenshot()
+                                qr_placeholder.image(screenshot, caption="📸 Scan this QR Code with your phone", width=500)
+                                status_text.info(f"⏳ Waiting for scan... ({int(45 - (time.time() - start_time))}s remaining)")
+                                time.sleep(1.5)
+                            except Exception:
+                                break
+                    # ==========================================================
+
                     st.markdown("""
                     <div class="warning-box">
                         <strong>⚠️ Next Steps:</strong><br><br>
