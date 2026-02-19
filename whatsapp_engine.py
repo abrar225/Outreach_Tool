@@ -124,15 +124,19 @@ class WhatsAppBot:
                 return False, "❌ Python 3.13 Compatibility Issue!\n\nPlaywright doesn't fully support Python 3.13 yet.\n\nPlease install Python 3.12 from:\nhttps://www.python.org/downloads/\n\nSee PYTHON_313_FIX.md for detailed instructions.", None
             
             # Launch persistent context
+            # Detect cloud environment (Streamlit Cloud uses Linux)
+            is_cloud = sys.platform.startswith("linux")
+            
             try:
                 self.context = self.playwright.chromium.launch_persistent_context(
                     user_data_dir=USER_DATA_DIR,
-                    headless=False,
+                    headless=is_cloud,  # Run headless on Streamlit Cloud
                     viewport=None,  # Maximize window
                     args=[
                         '--start-maximized',
                         '--disable-blink-features=AutomationControlled',
                         '--no-sandbox',
+                        '--disable-setuid-sandbox',
                         '--disable-dev-shm-usage',
                         '--disable-gpu',
                         '--disable-extensions',

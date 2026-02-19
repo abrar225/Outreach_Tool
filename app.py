@@ -6,8 +6,36 @@ FIXED: Singleton Lock Issue with Open-Close-Reopen Architecture
 
 import streamlit as st
 import pandas as pd
+import os
 import time
+import random
+import subprocess
+import sys
+from datetime import datetime
 from whatsapp_engine import WhatsAppBot
+
+# ==================== CLOUD DEPLOYMENT FIX ====================
+def install_playwright_browsers():
+    """Ensure Playwright browsers are installed on Streamlit Cloud."""
+    try:
+        # Check if we are running in a cloud environment (typically Linux)
+        if sys.platform.startswith("linux"):
+            # We don't want to run this every time, so we check for a marker or cache
+            # Streamlit Cloud cache is usually in ~/.cache/ms-playwright
+            marker_file = "/tmp/playwright_installed.txt"
+            if not os.path.exists(marker_file):
+                with st.spinner("🚀 First-time Setup: Installing WhatsApp Engine components... (May take 1 minute)"):
+                    subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], check=True)
+                    # Install dependencies for the browser
+                    subprocess.run([sys.executable, "-m", "playwright", "install-deps", "chromium"], check=True)
+                    with open(marker_file, "w") as f:
+                        f.write("Installed")
+                st.success("✅ Engine components installed successfully!")
+    except Exception as e:
+        st.error(f"⚠️ Setup Error: {str(e)}")
+
+# Run the installer at startup
+install_playwright_browsers()
 import io
 
 # ==================== PAGE CONFIGURATION ====================
