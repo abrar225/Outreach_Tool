@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+venv/
+env/
+.venv/
+
+# Browser Session Data (contains login tokens - NEVER commit)
+firehox_wa_session/
+
+# User Data Files
+leads.csv
+leads sheet.xlsx
+*.xlsx
+cleaned_leads.csv
+campaign_report_*.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store

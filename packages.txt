@@ -1,0 +1,11 @@
+libgbm1
+libnss3
+libnspr4
+libasound2
+libatk-bridge2.0-0
+libgtk-3-0
+libx11-xcb1
+libxcb-dri3-0
+libdrm2
+libice6
+libsm6
