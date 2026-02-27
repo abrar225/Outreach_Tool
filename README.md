@@ -73,3 +73,4 @@ streamlit run app.py
 <!-- [2025-12-19T11:04:19] docs(readme): update project documentation and overview -->
 <!-- [2026-01-20T19:32:37] style: improve formatting and badge alignment -->
 <!-- [2026-02-20T19:26:58] docs(readme): update project documentation and overview -->
+<!-- [2026-02-27T16:35:26] style: improve formatting and badge alignment -->
